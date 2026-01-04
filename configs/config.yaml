@@ -1,0 +1,35 @@
+server:
+  http:
+    addr: 0.0.0.0:2614
+    timeout: 1s
+
+machine_id: 1 # 机器ID，用于生成唯一ID
+
+data:
+  database:
+    addr: localhost:1406
+    user: short_url
+    password: short_url
+    dbname: shorturl
+    max_idle_conn: 100
+    max_open_conn: 150
+    max_idle_time: 30
+    low_threshold_millisecond: 10 # SQL执行超过10ms，就算慢sql
+
+  redis:
+    addr: localhost:1479
+    password: "redis_short_url"
+    db: 0
+    pool_size: 200
+    bloom_filter_size: 1000000 # 布隆过滤器大小
+    error_rate: 0.01 # 布隆过滤器错误率
+    read_timeout: 2s
+    write_timeout: 1s
+
+log:
+  level: info
+  log_path: ./log
+  max_size: 100 # 日志文件最大大小，单位MB
+  max_backups: 3 # 日志文件最大备份数
+  console: true
+  filename: shorturl.log

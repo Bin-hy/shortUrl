@@ -1,0 +1,24 @@
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: short_url_mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: shorturl
+      MYSQL_USER: short_url
+      MYSQL_PASSWORD: short_url
+    ports:
+      - 1406:3306
+    volumes:
+      - ./mysql:/var/lib/mysql
+      - ./sql/shortUrl.sql:/docker-entrypoint-initdb.d/shortUrl.sql
+
+  redis:
+    image: redis:7.4
+    container_name: short_url_redis
+    environment:
+      REDIS_PASSWORD: "redis_short_url"
+    ports:
+      - 1479:6379
+    volumes:
+      - ./redis:/data
